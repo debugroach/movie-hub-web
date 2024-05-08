@@ -3,6 +3,7 @@ import React from 'react'
 import { Movie } from '../hooks/useMovies'
 import { HeartFilled } from '@ant-design/icons'
 import { color } from 'framer-motion'
+import CriticScore from './CriticScore'
 
 
 interface Props {
@@ -25,11 +26,10 @@ const MovieCard = ({ movie }: Props) => {
       <Image src={"https://image.tmdb.org/t/p/w500" + movie.backdrop_path} />
       <CardBody>
         <HStack justifyContent='space-between' marginBottom={3}>
-          {/* <PlatformIconList platforms={movie.parent_platforms?.map(p => p.platform)} />
-          <CriticScore score={movie.metacritic} /> */}
           <Button borderRadius='lg' colorScheme='red' variant='ghost' onClick={() => handleClick()}>
             <HeartFilled style={{ color: color }} />
           </Button>
+          <CriticScore score={movie.vote_average} />
         </HStack>
         <Heading fontSize='2xl'>{movie.title}</Heading>
       </CardBody>
