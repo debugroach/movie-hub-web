@@ -28,7 +28,7 @@ const useMovies = ({ genre }: Props) => {
     else if (genre === 'Upcoming') genre = 'upcoming';
     else if (genre === 'Now Playing') genre = 'now_playing';
 
-    let apiEndpoint = genre ? '/movie/' + genre : '/movie/popular';
+    let apiEndpoint = '/movie/' + genre;
     console.log(genre);
     useEffect(() => {
         const controller = new AbortController();
