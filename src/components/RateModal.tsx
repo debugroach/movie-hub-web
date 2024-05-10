@@ -1,27 +1,16 @@
-import React, { useState } from 'react';
-import { Button, Modal, Rate } from 'antd';
+import { useState } from 'react';
+import { Button, message, Modal, Rate } from 'antd';
 import { Movie } from '../hooks/useMovies';
-import RateForm from './RateForm';
 
 interface Props {
+    user: string | null;
     movie: Movie,
 }
-const RateModal = ({ movie }: Props) => {
+const RateModal = ({ user, movie }: Props) => {
     const [open, setOpen] = useState(false);
-    const [confirmLoading, setConfirmLoading] = useState(false);
-    const [modalText, setModalText] = useState('Content of the modal');
-
+    const [messageApi, contextHolder] = message.useMessage();
     const showModal = () => {
         setOpen(true);
-    };
-
-    const handleOk = () => {
-        setModalText('The modal will be closed after two seconds');
-        setConfirmLoading(true);
-        setTimeout(() => {
-            setOpen(false);
-            setConfirmLoading(false);
-        }, 2000);
     };
 
     const handleCancel = () => {
@@ -29,19 +18,36 @@ const RateModal = ({ movie }: Props) => {
         setOpen(false);
     };
 
+
+    const onClick = (value: number) => {
+        console.log(value);
+        if (user) {
+            console.log(movie.id, value);
+            messageApi.open({
+                type: 'success',
+                content: 'You have rated this movie successfully!',
+            });
+        } else {
+            messageApi.open({
+                type: 'error',
+                content: 'you need to login to rate this movie',
+            });
+        }
+        setOpen(false);
+    }
+
     return (
         <>
+            {contextHolder}
             <Button type="primary" onClick={showModal}>
-                Rate
+                Rate for this movie
             </Button>
             <Modal
-                title="Login"
                 open={open}
-                onOk={handleOk}
-                confirmLoading={confirmLoading}
                 onCancel={handleCancel}
+                footer={null}
             >
-                <RateForm />
+                <Rate allowHalf onChange={(value) => onClick(value)} />
             </Modal>
         </>
     );

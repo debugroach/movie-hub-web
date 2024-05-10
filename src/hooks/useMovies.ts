@@ -23,18 +23,18 @@ const useMovies = ({ genre }: Props) => {
     const [error, setError] = React.useState('');
     const [isLoading, setLoading] = React.useState(false);
 
-    if (genre === 'Popular') genre = 'popular';
-    else if (genre === 'Top Rated') genre = 'top_rated';
-    else if (genre === 'Upcoming') genre = 'upcoming';
-    else if (genre === 'Now Playing') genre = 'now_playing';
+    let apiEndpoint = '/movie/';
+    if (genre === 'Popular') apiEndpoint += 'popular';
+    else if (genre === 'Top Rated') apiEndpoint += 'top_rated';
+    else if (genre === 'Upcoming') apiEndpoint += 'upcoming';
+    else if (genre === 'Now Playing') apiEndpoint += 'now_playing';
+    else apiEndpoint += 'top_rated';
 
-    let apiEndpoint = '/movie/' + genre;
     console.log(genre);
     useEffect(() => {
-        const controller = new AbortController();
-
         setLoading(true);
-        apiClient.get<FetchMoviesResponse>(apiEndpoint, { signal: controller.signal })
+
+        apiClient.get<FetchMoviesResponse>(apiEndpoint)
             .then(res => {
                 setMovies(res.data.results);
                 setLoading(false);
@@ -45,7 +45,6 @@ const useMovies = ({ genre }: Props) => {
                 setLoading(false);
             });
 
-        return () => controller.abort()
     }, [genre])
 
     return { movies, error, isLoading }

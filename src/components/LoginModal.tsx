@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { Button, Modal, Rate } from 'antd';
-import { Movie } from '../hooks/useMovies';
-import RateForm from './RateForm';
+import { Button, Modal } from 'antd';
 import LoginForm from './LoginForm';
 
+interface Props {
+    setUser: React.Dispatch<React.SetStateAction<string | null>>;
+}
 
-const LoginModal = () => {
+const LoginModal = ({ setUser }: Props) => {
     const [open, setOpen] = useState(false);
-    const [confirmLoading, setConfirmLoading] = useState(false);
+
 
     const showModal = () => {
         setOpen(true);
@@ -18,19 +19,19 @@ const LoginModal = () => {
         setOpen(false);
     };
 
+
     return (
         <>
             <Button type="primary" onClick={showModal}>
-                Rate
+                Login
             </Button>
             <Modal
                 title="Login"
                 open={open}
-                confirmLoading={confirmLoading}
                 onCancel={handleCancel}
                 footer={null}
             >
-                <LoginForm />
+                <LoginForm setOpen={setOpen} setUser={setUser} />
             </Modal>
         </>
     );

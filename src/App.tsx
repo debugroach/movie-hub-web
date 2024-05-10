@@ -6,6 +6,8 @@ import { useState } from "react";
 
 function App() {
   const [selectedGenre, setSelectedGenre] = useState<string | null>('Now Playing');
+  const [user, setUser] = useState<string | null>(localStorage.getItem('username'));
+
   return (
     <Grid
       templateAreas={{
@@ -18,7 +20,7 @@ function App() {
       }}
     >
       <GridItem area="nav">
-        <NavBar />
+        <NavBar user={user} setUser={setUser} />
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
@@ -26,7 +28,7 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area="main">
-        <MovieGrid genre={selectedGenre} />
+        <MovieGrid user={user} genre={selectedGenre} />
       </GridItem>
     </Grid >
   );

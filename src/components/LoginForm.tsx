@@ -1,18 +1,25 @@
 import type { FormProps } from 'antd';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Form, Input } from 'antd';
 
 type FieldType = {
     username?: string;
     password?: string;
-    remember?: string;
 };
 
 
+interface Props {
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    setUser: React.Dispatch<React.SetStateAction<string | null>>;
+}
 
-
-const LoginForm = () => {
+const LoginForm = ({ setOpen, setUser }: Props) => {
     const onFinish = (values: FieldType) => {
         console.log('Success:', values);
+        setOpen(false);
+        if (values.username) {
+            localStorage.setItem('username', values.username);
+            setUser(values.username);
+        }
     };
 
     const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
@@ -22,10 +29,9 @@ const LoginForm = () => {
     return (
         <Form
             name="basic"
-            labelCol={{ span: 8 }}
+            labelCol={{ span: 6 }}
             wrapperCol={{ span: 16 }}
             style={{ maxWidth: 600 }}
-            initialValues={{ remember: true }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
@@ -46,10 +52,14 @@ const LoginForm = () => {
                 <Input.Password />
             </Form.Item>
 
-            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+            <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
                 <Button type="primary" htmlType="submit">
-                    Submit
+                    Login
                 </Button>
+
+            </Form.Item>
+            <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
+                unregistered user will be registered automatically
             </Form.Item>
         </Form>
     )
