@@ -1,8 +1,7 @@
 import type { FormProps } from 'antd';
-import { Alert, Button, Form, Input, message } from 'antd';
+import { Button, Form, Input, message } from 'antd';
 import axios from 'axios';
 import { url } from '../config';
-import { useState } from 'react';
 
 type FieldType = {
     username?: string;
@@ -11,11 +10,10 @@ type FieldType = {
 
 
 interface Props {
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
     setUser: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
-const LoginForm = ({ setOpen, setUser }: Props) => {
+const LoginForm = ({ setUser }: Props) => {
     const [messageApi, contextHolder] = message.useMessage();
 
     const onFinish = async (values: FieldType) => {

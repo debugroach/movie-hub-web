@@ -1,8 +1,9 @@
-import { SimpleGrid, Text } from "@chakra-ui/react";
+import { SimpleGrid } from "@chakra-ui/react";
 import useMovies from "../hooks/useMovies";
 import MovieCard from "./MovieCard";
 import MovieCardSkeleton from "./MovieCardSklecton";
 import MovieCardContainer from "./MovieCardContainer";
+import { message } from "antd";
 
 interface Props {
     user: string | null;
@@ -10,12 +11,13 @@ interface Props {
 }
 
 const MovieGrid = ({ user, genre }: Props) => {
-    const { movies, error, isLoading } = useMovies({ genre });
+    const [messageApi, contextHolder] = message.useMessage();
+    const { movies, isLoading } = useMovies({ user, genre, messageApi });
     const skeletons = [1, 2, 3, 4, 5, 6];
 
     return (
         <>
-            {error && (<Text>{error}</Text>)}
+            {contextHolder}
             <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} padding="10px"
                 spacing={12}>
                 {isLoading &&
