@@ -54,17 +54,17 @@ const LoginForm = ({ setUser }: Props) => {
                 autoComplete="off"
             >
                 <Form.Item<FieldType>
-                    label="Username"
+                    label="用户名"
                     name="username"
-                    rules={[{ required: true, message: 'Please input your username!' }]}
+                    rules={[{ required: true, message: '请输入用户名!' }]}
                 >
                     <Input />
                 </Form.Item>
 
                 <Form.Item<FieldType>
-                    label="Password"
+                    label="密码"
                     name="password"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
+                    rules={[{ required: true, message: '请输入密码!' }]}
                 >
                     <Input.Password />
                 </Form.Item>
@@ -72,12 +72,12 @@ const LoginForm = ({ setUser }: Props) => {
                 <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
 
                     <Button type="primary" htmlType="submit">
-                        Login
+                        登录
                     </Button>
 
                 </Form.Item>
                 <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
-                    unregistered user will be registered automatically
+                    未注册用户将自动注册
                 </Form.Item>
             </Form >
         </>

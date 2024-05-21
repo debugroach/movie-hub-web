@@ -17,7 +17,7 @@ const MovieCard = ({ user, movie }: Props) => {
         <Heading fontSize='2xl'>{movie.title}</Heading>
         <HStack marginTop={3} justifyContent={"space-between"}>
           <HStack>
-            <Text fontSize='md'>Average Rate:</Text>
+            <Text fontSize='md'>平均评分：</Text>
             <CriticScore score={movie.vote_average} />
           </HStack>
           <RateModal user={user} movie={movie} />

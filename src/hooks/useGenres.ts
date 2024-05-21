@@ -1,5 +1,5 @@
 const useGenres = () => {
-    const genres = ["Now Playing", "Popular", "Top Rated", "Upcoming", "Recommend"];
+    const genres = ["正在上映", "热门", "高分", "即将上映", "个性化推荐"];
     return { genres }
 }
 

@@ -28,23 +28,14 @@ const useMovies = ({ user, genre, messageApi }: Props) => {
     const [error, setError] = React.useState('');
     const [isLoading, setLoading] = React.useState(false);
 
-
-    let apiEndpoint = '/movie/';
-    if (genre === 'Popular') apiEndpoint += 'popular';
-    else if (genre === 'Top Rated') apiEndpoint += 'top_rated';
-    else if (genre === 'Upcoming') apiEndpoint += 'upcoming';
-    else if (genre === 'Now Playing') apiEndpoint += 'now_playing';
-
-
-
     console.log(genre);
     useEffect(() => {
         setLoading(true);
-        if (genre === 'Recommend') {
+        if (genre === '个性化推荐') {
             if (!user) {
                 messageApi.open({
                     type: 'error',
-                    content: 'Please login to get recommendations',
+                    content: '登录以获得个性化推荐',
                 });
                 return
             }
@@ -54,7 +45,7 @@ const useMovies = ({ user, genre, messageApi }: Props) => {
                     if (res.data.movies.length === 0) {
                         messageApi.open({
                             type: 'error',
-                            content: 'Rate for your favorite movies to get recommendations',
+                            content: '为你喜爱的电影评分来获得个性化推荐',
                         });
                     }
                     setMovies(res.data.movies);
@@ -66,6 +57,11 @@ const useMovies = ({ user, genre, messageApi }: Props) => {
                     setLoading(false);
                 });
         } else {
+            let apiEndpoint = '/movie/';
+            if (genre === '热门') apiEndpoint += 'popular';
+            else if (genre === '高分') apiEndpoint += 'top_rated';
+            else if (genre === '即将上映') apiEndpoint += 'upcoming';
+            else if (genre === '正在上映') apiEndpoint += 'now_playing';
             apiClient.get<FetchMoviesResponse>(apiEndpoint)
                 .then(res => {
                     setMovies(res.data.results);

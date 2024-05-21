@@ -23,15 +23,15 @@ const LoginModal = ({ setUser }: Props) => {
     return (
         <>
             <Button type="primary" onClick={showModal}>
-                Login
+                登录
             </Button>
             <Modal
-                title="Login"
+                title="登录"
                 open={open}
                 onCancel={handleCancel}
                 footer={null}
             >
-                <LoginForm setOpen={setOpen} setUser={setUser} />
+                <LoginForm setUser={setUser} />
             </Modal>
         </>
     );

@@ -5,7 +5,7 @@ import GenreList from "./components/GenreList";
 import { useState } from "react";
 
 function App() {
-  const [selectedGenre, setSelectedGenre] = useState<string | null>('Now Playing');
+  const [selectedGenre, setSelectedGenre] = useState<string | null>('正在上映');
   const [user, setUser] = useState<string | null>(localStorage.getItem('username'));
 
   return (

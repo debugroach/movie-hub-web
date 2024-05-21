@@ -44,7 +44,7 @@ const RateModal = ({ user, movie }: Props) => {
         } else {
             messageApi.open({
                 type: 'error',
-                content: 'you need to login to rate this movie',
+                content: '需要先登录',
             });
         }
         setOpen(false);
@@ -54,7 +54,7 @@ const RateModal = ({ user, movie }: Props) => {
         <>
             {contextHolder}
             <Button type="primary" onClick={showModal}>
-                Rate for this movie
+                为这部电影评分
             </Button>
             <Modal
                 open={open}

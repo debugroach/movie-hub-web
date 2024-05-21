@@ -21,7 +21,7 @@ const NavBar = ({ user, setUser }: Props) => {
       {user ?
         <>
           <Text > {user}</Text>
-          <Button type='primary' onClick={onClick}>Logout</Button>
+          <Button type='primary' onClick={onClick}>注销</Button>
         </> : <LoginModal setUser={setUser} />}
 
       <ColorModeSwitch />
